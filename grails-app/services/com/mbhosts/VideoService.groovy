@@ -10,7 +10,6 @@ import java.util.stream.Collectors
 
 class VideoService {
 
-
     ConcurrentNavigableMap<Long, Video> videoMap = new ConcurrentSkipListMap<>()
 
     void addVideo(Video video) {
