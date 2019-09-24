@@ -17,6 +17,11 @@ class Video {
     void setDuration(Double _duration) { this.duration = _duration }
     void setTimestamp(Long _timestamp) { this.timestamp = _timestamp }
 
-    Boolean validateVideo() { return !(this.timestamp < System.currentTimeMillis()) }
+    Boolean validateVideo() {
+        if (this.duration && this.timestamp)
+            return !(this.timestamp < System.currentTimeMillis())
+        else
+            return false
+    }
 
 }
