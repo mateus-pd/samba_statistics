@@ -25,7 +25,9 @@ class VideoController {
     }
 
     def apiDeleteVideos() {
+        videoService.clearVideos()
 
+        render(status: 204)
     }
 
 }
