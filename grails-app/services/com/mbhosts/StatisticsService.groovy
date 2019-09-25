@@ -6,8 +6,11 @@ class StatisticsService {
 
     Statistics getStatistics() {
         List<Video> videoList = videoService.getAllVideos()
-        DoubleSummaryStatistics statistics = videoList.stream().mapToDouble().summaryStatistics()
-        return castSummaryStatistics(statistics)
+        if (videoList) {
+            DoubleSummaryStatistics statistics = videoList.stream().mapToDouble{it.getDuration()}.summaryStatistics()
+            return castSummaryStatistics(statistics)
+        }
+        else return new Statistics(0,0,0,0,0)
     }
 
     Statistics castSummaryStatistics(DoubleSummaryStatistics _stats) {

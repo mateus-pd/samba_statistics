@@ -10,12 +10,10 @@ import java.util.stream.Collectors
 
 class VideoService {
 
-    ConcurrentNavigableMap<Long, Video> videoMap = new ConcurrentSkipListMap<>()
+    ConcurrentSkipListMap<Long, Video> videoMap = new ConcurrentSkipListMap<>()
 
     void addVideo(Video video) {
-        def instant = new Date(video.getTimestamp()).toInstant()
-        def seconds = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).second
-        videoMap.put(seconds, video)
+        videoMap.put(video.getTimestamp(), video)
     }
 
     List<Video> getAllVideos() {
