@@ -6,6 +6,7 @@ import grails.plugins.rest.client.RestResponse
 import grails.testing.mixin.integration.Integration
 import grails.testing.web.controllers.ControllerUnitTest
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.http.HttpStatus
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -32,7 +33,6 @@ class StatisticsControllerSpec extends Specification implements ControllerUnitTe
             params.add([duration: 351.9, timestamp: System.currentTimeMillis()+85000])
             params.add([duration: 400.4, timestamp: System.currentTimeMillis()+90000])
 
-
         when:
             // Delete All Videos
             println("/videos DELETE")
@@ -58,7 +58,7 @@ class StatisticsControllerSpec extends Specification implements ControllerUnitTe
             }
 
         then:
-            resp.status == 201
+            resp.status == HttpStatus.OK.value()
             resp.json.max == 400.4
             resp.json.min == 100.2
             resp.json.sum == 1719.2

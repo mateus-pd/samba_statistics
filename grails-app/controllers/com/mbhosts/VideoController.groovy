@@ -1,5 +1,6 @@
 package com.mbhosts
 
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.RequestBody
 
 class VideoController {
@@ -10,24 +11,24 @@ class VideoController {
 	
     def apiAddVideo(@RequestBody Video video) {
         if (!video) {
-            render(status: 204)
+            render(status: HttpStatus.NO_CONTENT.value())
             return
         }
 
         if (video.validateVideo())
             videoService.addVideo(video)
         else {
-            render(status: 204)
+            render(status: HttpStatus.NO_CONTENT.value())
             return
         }
 
-        render(status: 201)
+        render(status: HttpStatus.CREATED.value())
     }
 
     def apiDeleteVideos() {
         videoService.clearVideos()
 
-        render(status: 204)
+        render(status: HttpStatus.NO_CONTENT.value())
     }
 
 }

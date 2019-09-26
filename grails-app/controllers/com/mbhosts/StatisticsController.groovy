@@ -1,6 +1,7 @@
 package com.mbhosts
 
 import grails.converters.JSON
+import org.springframework.http.HttpStatus
 
 class StatisticsController {
 
@@ -12,9 +13,9 @@ class StatisticsController {
         def statistics = statisticsService.getStatistics()
 
         if (statistics)
-            render(status: 201, contentType: "application/json", statistics as JSON)
+            render(status: HttpStatus.OK.value(), contentType: "application/json", statistics as JSON)
         else
-            render(status: 204)
+            render(status: HttpStatus.NO_CONTENT.value())
     }
 
 }
