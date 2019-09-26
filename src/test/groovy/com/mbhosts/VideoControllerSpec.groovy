@@ -1,5 +1,6 @@
 package com.mbhosts
 
+import grails.converters.JSON
 import grails.plugins.rest.client.RestBuilder
 import grails.plugins.rest.client.RestResponse
 import grails.testing.mixin.integration.Integration
@@ -15,13 +16,13 @@ class VideoControllerSpec extends Specification implements ControllerUnitTest<Vi
     def rest = new RestBuilder(connectTimeout: 1000, readTimeout: 10000)
     @Shared
     def url = "http://localhost:${serverPort}/videos"
-    @Shared
+    @Shared // User: sambatech Pass: sambatech
     def token = "Basic c2FtYmF0ZWNoOnNhbWJhdGVjaA=="
 
     @Unroll('validate the API Rest /videos POST with "#duration" and "#timestamp" should have returned status "#shouldBeValid"')
     void "test apiAddVideo()"() {
         given:
-            def params = '{ "duration" : ' + duration + ', "timestamp" : ' + timestamp + '}'
+            def params = [duration: duration, timestamp: timestamp]
 
         when:
             println "timestamp to Date -> ${new Date(timestamp).dateTimeString}"
@@ -31,7 +32,7 @@ class VideoControllerSpec extends Specification implements ControllerUnitTest<Vi
                 header("Accept-Encoding", "gzip, deflate, br")
                 header("Accept-Language", "pt-BR, pt, en-US, en")
                 contentType("application/json")
-                body(params)
+                body(params as JSON)
             }
 
         then:
