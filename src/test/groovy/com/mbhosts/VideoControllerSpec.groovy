@@ -48,4 +48,14 @@ class VideoControllerSpec extends Specification implements ControllerUnitTest<Vi
             151.2    | System.currentTimeMillis()-70000     | 204
     }
 
+    @Unroll('validate the API Rest /videos DELETE')
+    void "test apiDeleteVideos()"() {
+        when:
+            RestResponse resp = rest.delete(url) {
+                header("Authorization", token)
+            }
+        then:
+            resp.status == 204
+    }
+
 }
