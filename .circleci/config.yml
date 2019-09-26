@@ -27,7 +27,10 @@ jobs:
               - ~/.gradle
           key: grailsapp-{{ checksum "build.gradle" }}-{{ checksum "gradle.properties" }}
       # Run Unit Tests
-      - run: ./gradlew test
+      - run: ./gradlew test -i
+      - store_artifacts:
+          path: build/test-results/test
+          destination: tests
 
       # Download and cache dependencies
       - run: ./gradlew build --refresh-dependencies
