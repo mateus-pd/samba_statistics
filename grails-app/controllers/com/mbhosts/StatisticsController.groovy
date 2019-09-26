@@ -9,7 +9,7 @@ class StatisticsController {
 
 	static responseFormats = ['json']
 
-    def apiStatistics() {
+    synchronized def apiStatistics() {
         def statistics = statisticsService.getStatistics()
 
         if (statistics)

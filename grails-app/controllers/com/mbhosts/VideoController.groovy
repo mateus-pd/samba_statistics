@@ -9,7 +9,7 @@ class VideoController {
 
     static responseFormats = ['json']
 	
-    def apiAddVideo(@RequestBody Video video) {
+    synchronized def apiAddVideo(@RequestBody Video video) {
         if (!video) {
             render(status: HttpStatus.NO_CONTENT.value())
             return
@@ -25,7 +25,7 @@ class VideoController {
         render(status: HttpStatus.CREATED.value())
     }
 
-    def apiDeleteVideos() {
+    synchronized def apiDeleteVideos() {
         videoService.clearVideos()
 
         render(status: HttpStatus.NO_CONTENT.value())

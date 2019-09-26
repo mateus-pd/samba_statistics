@@ -22,39 +22,29 @@ class VideoControllerSpec extends Specification implements ControllerUnitTest<Vi
     def token = "Basic c2FtYmF0ZWNoOnNhbWJhdGVjaA=="
 
     @Unroll('validate the API Rest /videos POST with a Valid Video')
-    void "test apiAddVideo() validVideo"() {
+    void "test apiAddVideo()"() {
         when:
-            def params = [duration: 198.2, timestamp: System.currentTimeMillis()+60000]
-            println "timestamp to Date -> ${new Date(params.timestamp).dateTimeString}"
-            RestResponse resp = rest.post("http://localhost:${serverPort}/videos") {
+            RestResponse respValid = rest.post("http://localhost:${serverPort}/videos") {
                 accept("*/*")
                 header("Authorization", token)
-                header("Accept-Encoding", "gzip, deflate, br")
-                header("Accept-Language", "pt-BR, pt, en-US, en")
                 contentType("application/json")
-                body(params as JSON)
+                body(new Video(duration: 178.2, timestamp: System.currentTimeMillis()+6000) as JSON)
             }
-
         then:
-            resp.status == HttpStatus.CREATED.value()
+            respValid.status == HttpStatus.CREATED.value()
     }
 
     @Unroll('validate the API Rest /videos POST with a Invalid Video')
     void "test apiAddVideo() invalidVideo"() {
         when:
-            def params = [duration: 198.2, timestamp: System.currentTimeMillis()-60000]
-            println "timestamp to Date -> ${new Date(params.timestamp).dateTimeString}"
-            RestResponse resp = rest.post("http://localhost:${serverPort}/videos") {
+            RestResponse respInvalid = rest.post("http://localhost:${serverPort}/videos") {
                 accept("*/*")
                 header("Authorization", token)
-                header("Accept-Encoding", "gzip, deflate, br")
-                header("Accept-Language", "pt-BR, pt, en-US, en")
                 contentType("application/json")
-                body(params as JSON)
+                body(new Video(duration: 188.2, timestamp: System.currentTimeMillis()-6000) as JSON)
             }
-
         then:
-            resp.status == HttpStatus.NO_CONTENT.value()
+            respInvalid.status == HttpStatus.NO_CONTENT.value()
     }
 
     @Unroll('validate the API Rest /videos DELETE')
