@@ -19,7 +19,10 @@ jobs:
               echo 'export AWS_USER="AKIAYRRYYDRUN37AWU4U"' >> $BASH_ENV
               echo 'export AWS_PASS="eEFi3nlvfzBzWJ7ACZF22wPxq58qPB/7HyKF5Jmn"' >> $BASH_ENV
               source $BASH_ENV
-
+      - run:
+          name: "Install pip"
+          command: |
+              apt install pip
       - run:
           name: "Install AWS EB CLI"
           command: |
