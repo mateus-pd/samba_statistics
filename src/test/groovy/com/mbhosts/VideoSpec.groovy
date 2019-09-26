@@ -10,12 +10,13 @@ class VideoSpec extends Specification {
         expect:
             new Video(duration: duration, timestamp: timestamp).validateVideo() == shouldBeValid
         where:
-            duration | timestamp                        | shouldBeValid
-            100      | System.currentTimeMillis() + 100 | true
-            110      | System.currentTimeMillis() - 100 | false
-            120      | null                             | false
-            null     | System.currentTimeMillis() + 100 | false
-            null     | null                             | false
+            duration | timestamp                          | shouldBeValid
+            100      | System.currentTimeMillis() + 100   | true
+            110      | System.currentTimeMillis() - 100   | false
+            120      | System.currentTimeMillis() + 61000 | false
+            130      | null                               | false
+            null     | System.currentTimeMillis() + 100   | false
+            null     | null                               | false
     }
 
 }

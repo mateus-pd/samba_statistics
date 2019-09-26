@@ -19,7 +19,7 @@ class Video {
 
     Boolean validateVideo() {
         if (this.duration && this.timestamp)
-            return !(this.timestamp < System.currentTimeMillis())
+            return !(this.timestamp < System.currentTimeMillis() || this.timestamp > System.currentTimeMillis() + 60000)
         else
             return false
     }
