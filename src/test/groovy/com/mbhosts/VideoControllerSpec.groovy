@@ -24,7 +24,7 @@ class VideoControllerSpec extends Specification implements ControllerUnitTest<Vi
     @Unroll('validate the API Rest /videos POST with a Valid Video')
     void "test apiAddVideo() validVideo"() {
         given:
-            def params = [duration: 198.2, timestamp: System.currentTimeMillis()+60000]
+            def params = [duration: 198.2, timestamp: System.currentTimeMillis()+120000]
 
         when:
             println "timestamp to Date -> ${new Date(params.timestamp).dateTimeString}"
@@ -44,7 +44,7 @@ class VideoControllerSpec extends Specification implements ControllerUnitTest<Vi
     @Unroll('validate the API Rest /videos POST with a Invalid Video')
     void "test apiAddVideo() invalidVideo"() {
         given:
-        def params = [duration: 198.2, timestamp: System.currentTimeMillis()-60000]
+        def params = [duration: 198.2, timestamp: System.currentTimeMillis()-120000]
 
         when:
         println "timestamp to Date -> ${new Date(params.timestamp).dateTimeString}"

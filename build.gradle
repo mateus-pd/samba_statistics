@@ -76,8 +76,8 @@ tasks.withType(Test) {
     systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
     systemProperty "webdriver.chrome.driver", System.getProperty('webdriver.chrome.driver')
     systemProperty "webdriver.gecko.driver", System.getProperty('webdriver.gecko.driver')
-    afterTest { desc, result ->
-        logger.quiet("${desc.className}")
-        logger.quiet "Executing Test: ${desc.name} | Result: ${result.resultType}"
+    afterTest { entity, result ->
+        logger.quiet("\n--> ${entity.className}")
+        logger.quiet "Executing Test: ${entity.name} | Result: ${result.resultType}"
     }
 }
