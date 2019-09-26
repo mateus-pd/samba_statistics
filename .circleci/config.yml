@@ -22,7 +22,7 @@ jobs:
       - run:
           name: "Install pip"
           command: |
-              apt install pip
+              sudo apt install pip
       - run:
           name: "Install AWS EB CLI"
           command: |
