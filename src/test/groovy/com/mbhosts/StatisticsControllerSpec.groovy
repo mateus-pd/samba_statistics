@@ -5,6 +5,7 @@ import grails.plugins.rest.client.RestBuilder
 import grails.plugins.rest.client.RestResponse
 import grails.testing.mixin.integration.Integration
 import grails.testing.web.controllers.ControllerUnitTest
+import org.springframework.beans.factory.annotation.Value
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -12,6 +13,8 @@ import spock.lang.Unroll
 @Integration
 class StatisticsControllerSpec extends Specification implements ControllerUnitTest<StatisticsController> {
 
+    @Value('${local.server.port}')
+    Integer serverPort
     @Shared
     def rest = new RestBuilder(connectTimeout: 1000, readTimeout: 10000)
     @Shared
