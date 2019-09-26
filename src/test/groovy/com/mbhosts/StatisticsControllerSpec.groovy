@@ -17,10 +17,6 @@ class StatisticsControllerSpec extends Specification implements ControllerUnitTe
     Integer serverPort
     @Shared
     def rest = new RestBuilder(connectTimeout: 1000, readTimeout: 10000)
-    @Shared
-    def url = "http://localhost:${serverPort}/statistics"
-    @Shared
-    def urlVideos = "http://localhost:${serverPort}/videos"
     @Shared // User: sambatech Pass: sambatech
     def token = "Basic c2FtYmF0ZWNoOnNhbWJhdGVjaA=="
 
@@ -40,13 +36,13 @@ class StatisticsControllerSpec extends Specification implements ControllerUnitTe
         when:
             // Delete All Videos
             println("/videos DELETE")
-            rest.delete(urlVideos) {
+            rest.delete("http://localhost:${serverPort}/videos") {
                 header("Authorization", token)
             }
             // Add Videos
             params.each { map ->
                 println "/videos POST: timestamp to Date -> ${new Date(map.timestamp).dateTimeString}"
-                rest.post(urlVideos) {
+                rest.post("http://localhost:${serverPort}/videos") {
                     accept("*/*")
                     header("Authorization", token)
                     header("Accept-Encoding", "gzip, deflate, br")
@@ -57,7 +53,7 @@ class StatisticsControllerSpec extends Specification implements ControllerUnitTe
             }
             // Get Statistics
             println("/statistics GET")
-            RestResponse resp = rest.get(url) {
+            RestResponse resp = rest.get("http://localhost:${serverPort}/statistics") {
                 header("Authorization", token)
             }
 

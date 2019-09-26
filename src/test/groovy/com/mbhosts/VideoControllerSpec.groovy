@@ -5,6 +5,7 @@ import grails.plugins.rest.client.RestBuilder
 import grails.plugins.rest.client.RestResponse
 import grails.testing.mixin.integration.Integration
 import grails.testing.web.controllers.ControllerUnitTest
+import org.springframework.beans.factory.annotation.Value
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -12,10 +13,10 @@ import spock.lang.Unroll
 @Integration
 class VideoControllerSpec extends Specification implements ControllerUnitTest<VideoController> {
 
+    @Value('${local.server.port}')
+    Integer serverPort
     @Shared
     def rest = new RestBuilder(connectTimeout: 1000, readTimeout: 10000)
-    @Shared
-    def url = "http://localhost:${serverPort}/videos"
     @Shared // User: sambatech Pass: sambatech
     def token = "Basic c2FtYmF0ZWNoOnNhbWJhdGVjaA=="
 
@@ -26,7 +27,7 @@ class VideoControllerSpec extends Specification implements ControllerUnitTest<Vi
 
         when:
             println "timestamp to Date -> ${new Date(timestamp).dateTimeString}"
-            RestResponse resp = rest.post(url) {
+            RestResponse resp = rest.post("http://localhost:${serverPort}/videos") {
                 accept("*/*")
                 header("Authorization", token)
                 header("Accept-Encoding", "gzip, deflate, br")
@@ -52,7 +53,7 @@ class VideoControllerSpec extends Specification implements ControllerUnitTest<Vi
     @Unroll('validate the API Rest /videos DELETE')
     void "test apiDeleteVideos()"() {
         when:
-            RestResponse resp = rest.delete(url) {
+            RestResponse resp = rest.delete("http://localhost:${serverPort}/videos") {
                 header("Authorization", token)
             }
         then:
