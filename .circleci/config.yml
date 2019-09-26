@@ -16,13 +16,15 @@ jobs:
       - run:
           name: "Setup Environment Variables"
           command: |
-              echo 'export AWS_USER="AKIAYRRYYDRUN37AWU4U"' >> $BASH_ENV
-              echo 'export AWS_PASS="eEFi3nlvfzBzWJ7ACZF22wPxq58qPB/7HyKF5Jmn"' >> $BASH_ENV
+              echo 'export AWS_USER=""' >> $BASH_ENV
+              echo 'export AWS_PASS=""' >> $BASH_ENV
               source $BASH_ENV
       - run:
           name: "Install pip"
           command: |
-              sudo apt install python-pip
+              sudo apt update
+              sudo apt install -y python-pip
+              pip --version
       - run:
           name: "Install AWS EB CLI"
           command: |
