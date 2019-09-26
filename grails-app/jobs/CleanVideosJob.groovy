@@ -8,7 +8,7 @@ class CleanVideosJob {
     VideoService videoService
 
     static triggers = {
-        simple repeatInterval: 10000l // execute job once in 10 seconds
+        simple repeatInterval: 120000l // execute job once in 1 minute
     }
 
     def execute() {

@@ -23,7 +23,7 @@ class StatisticsControllerSpec extends Specification implements ControllerUnitTe
 
     @Unroll('validate the API Rest /statistics GET')
     void "test apiStatistics()"() {
-        given:
+        when:
             def params = []
             params.add([duration: 100.2, timestamp: System.currentTimeMillis()+60000])
             params.add([duration: 231.3, timestamp: System.currentTimeMillis()+65000])
@@ -33,7 +33,6 @@ class StatisticsControllerSpec extends Specification implements ControllerUnitTe
             params.add([duration: 351.9, timestamp: System.currentTimeMillis()+85000])
             params.add([duration: 400.4, timestamp: System.currentTimeMillis()+90000])
 
-        when:
             // Delete All Videos
             println("/videos DELETE")
             rest.delete("http://localhost:${serverPort}/videos") {
