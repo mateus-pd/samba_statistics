@@ -6,6 +6,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
+    parallelism: 2
 
     environment:
       # Customize the JVM maximum heap limit

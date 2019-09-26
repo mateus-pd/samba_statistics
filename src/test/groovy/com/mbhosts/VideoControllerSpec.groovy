@@ -26,6 +26,11 @@ class VideoControllerSpec extends Specification implements ControllerUnitTest<Vi
             def params = [duration: duration, timestamp: timestamp]
 
         when:
+            // Delete All Videos
+            rest.delete("http://localhost:${serverPort}/videos") {
+                header("Authorization", token)
+            }
+
             println "timestamp to Date -> ${new Date(timestamp).dateTimeString}"
             RestResponse resp = rest.post("http://localhost:${serverPort}/videos") {
                 accept("*/*")
