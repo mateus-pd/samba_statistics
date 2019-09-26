@@ -42,10 +42,10 @@ class VideoControllerSpec extends Specification implements ControllerUnitTest<Vi
         where:
             // Adding to Timestamp 'cause when the test starts the System.currentTimeMillis() is on the past
             duration | timestamp                            | shouldBeValid
-            100.4    | System.currentTimeMillis()+60000     | 201
-            120.5    | System.currentTimeMillis()+70000     | 201
-            104.1    | System.currentTimeMillis()+80000     | 201
-            198.2    | System.currentTimeMillis()+90000     | 201
+            100.4    | System.currentTimeMillis()+120000    | 201
+            120.5    | System.currentTimeMillis()+130000    | 201
+            104.1    | System.currentTimeMillis()+140000    | 201
+            198.2    | System.currentTimeMillis()+150000    | 201
             212.5    | System.currentTimeMillis()-60000     | 204
             151.2    | System.currentTimeMillis()-70000     | 204
     }
