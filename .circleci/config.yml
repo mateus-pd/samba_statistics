@@ -14,11 +14,9 @@ jobs:
 
     steps:
       - run:
-          name: "Setup Environment Variables"
+          name: "Setup AWS credentials"
           command: |
-              echo 'export AWS_USER=""' >> $BASH_ENV
-              echo 'export AWS_PASS=""' >> $BASH_ENV
-              source $BASH_ENV
+              mkdir ~/.aws && printf "[profile eb-cli]\naws_access_key_id = ${AWS_ACCESS_KEY_ID}\naws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}" > ~/.aws/config
       - run:
           name: "Install pip"
           command: |
@@ -29,6 +27,7 @@ jobs:
           name: "Install AWS EB CLI"
           command: |
               pip install awsebcli --upgrade --user
+              eb --version
       # Checkout Git Repository
       - checkout
 
@@ -56,3 +55,6 @@ jobs:
       - store_artifacts:
           path: build/libs
           destination: apps
+
+      # Deploy Application
+      - run: eb deploy sambastatistics

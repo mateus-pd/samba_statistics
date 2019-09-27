@@ -81,3 +81,7 @@ tasks.withType(Test) {
         logger.quiet "Executing Test: ${entity.name} | Result: ${result.resultType}"
     }
 }
+
+war {
+    archiveName = 'ROOT.war'
+}
