@@ -5,7 +5,7 @@ global:
   application_name: samba_statistics
   default_ec2_keyname: mbhosts
   default_platform: Tomcat 8.5 with Java 8 running on 64bit Amazon Linux/3.2.2
-  default_region: eu-east-2
+  default_region: us-east-2
   sc: git
 deploy:
   artifact: build/libs/ROOT.war
