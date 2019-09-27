@@ -1,5 +1,7 @@
 package com.mbhosts
 
+import java.time.Instant
+
 class Video {
 
     private Double duration
@@ -19,7 +21,7 @@ class Video {
 
     Boolean validateVideo() {
         if (this.duration && this.timestamp)
-            return !(this.timestamp < System.currentTimeMillis() || this.timestamp > System.currentTimeMillis() + 60000)
+            return !(this.timestamp < Instant.now().toEpochMilli())
         else
             return false
     }

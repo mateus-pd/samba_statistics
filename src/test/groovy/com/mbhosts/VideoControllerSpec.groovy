@@ -11,6 +11,8 @@ import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import java.time.Instant
+
 @Integration
 class VideoControllerSpec extends Specification implements ControllerUnitTest<VideoController> {
 
@@ -24,11 +26,12 @@ class VideoControllerSpec extends Specification implements ControllerUnitTest<Vi
     @Unroll('validate the API Rest /videos POST with a Valid Video')
     void "test apiAddVideo()"() {
         when:
+            def date = Instant.now().plusSeconds(10).toEpochMilli()
             RestResponse respValid = rest.post("http://localhost:${serverPort}/videos") {
                 accept("*/*")
                 header("Authorization", token)
                 contentType("application/json")
-                body(new Video(duration: 178.2, timestamp: System.currentTimeMillis()+6000) as JSON)
+                body(new Video(duration: 178.2, timestamp: date) as JSON)
             }
         then:
             respValid.status == HttpStatus.CREATED.value()
@@ -37,11 +40,12 @@ class VideoControllerSpec extends Specification implements ControllerUnitTest<Vi
     @Unroll('validate the API Rest /videos POST with a Invalid Video')
     void "test apiAddVideo() invalidVideo"() {
         when:
+        def date = Instant.now().minusSeconds(10).toEpochMilli()
             RestResponse respInvalid = rest.post("http://localhost:${serverPort}/videos") {
                 accept("*/*")
                 header("Authorization", token)
                 contentType("application/json")
-                body(new Video(duration: 188.2, timestamp: System.currentTimeMillis()-6000) as JSON)
+                body(new Video(duration: 188.2, timestamp: date) as JSON)
             }
         then:
             respInvalid.status == HttpStatus.NO_CONTENT.value()

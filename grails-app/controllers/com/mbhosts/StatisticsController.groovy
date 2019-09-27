@@ -12,10 +12,7 @@ class StatisticsController {
     synchronized def apiStatistics() {
         def statistics = statisticsService.getStatistics()
 
-        if (statistics)
-            render(status: HttpStatus.OK.value(), contentType: "application/json", statistics as JSON)
-        else
-            render(status: HttpStatus.NO_CONTENT.value())
+        render(status: HttpStatus.OK.value(), contentType: "application/json", statistics as JSON)
     }
 
 }

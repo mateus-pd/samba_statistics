@@ -12,6 +12,8 @@ import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import java.time.Instant
+
 @Integration
 class StatisticsControllerSpec extends Specification implements ControllerUnitTest<StatisticsController> {
 
@@ -28,13 +30,13 @@ class StatisticsControllerSpec extends Specification implements ControllerUnitTe
     void "test apiStatistics()"() {
         when:
             def params = []
-            params.add(new Video(duration: 100.2, timestamp: System.currentTimeMillis()+3000))
-            params.add(new Video(duration: 231.3, timestamp: System.currentTimeMillis()+4000))
-            params.add(new Video(duration: 200.6, timestamp: System.currentTimeMillis()+5000))
-            params.add(new Video(duration: 134.1, timestamp: System.currentTimeMillis()+6000))
-            params.add(new Video(duration: 300.7, timestamp: System.currentTimeMillis()+7000))
-            params.add(new Video(duration: 351.9, timestamp: System.currentTimeMillis()+8000))
-            params.add(new Video(duration: 400.4, timestamp: System.currentTimeMillis()+9000))
+            params.add(new Video(duration: 100.2, timestamp: Instant.now().plusSeconds(3).toEpochMilli()))
+            params.add(new Video(duration: 231.3, timestamp: Instant.now().plusSeconds(4).toEpochMilli()))
+            params.add(new Video(duration: 200.6, timestamp: Instant.now().plusSeconds(5).toEpochMilli()))
+            params.add(new Video(duration: 134.1, timestamp: Instant.now().plusSeconds(6).toEpochMilli()))
+            params.add(new Video(duration: 300.7, timestamp: Instant.now().plusSeconds(7).toEpochMilli()))
+            params.add(new Video(duration: 351.9, timestamp: Instant.now().plusSeconds(8).toEpochMilli()))
+            params.add(new Video(duration: 400.4, timestamp: Instant.now().plusSeconds(9).toEpochMilli()))
 
             // Delete All Videos
             videoService.clearVideos()

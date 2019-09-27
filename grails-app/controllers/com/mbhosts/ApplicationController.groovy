@@ -10,7 +10,8 @@ class ApplicationController implements PluginManagerAware {
     GrailsPluginManager pluginManager
 
     def index() {
-        render([noviews: ":)"] as JSON)
+        render([noviews: null] as JSON)
         //[grailsApplication: grailsApplication, pluginManager: pluginManager]
     }
+
 }

@@ -1,7 +1,6 @@
 package com.mbhosts
 
-import groovy.time.TimeCategory
-
+import java.time.Instant
 import java.util.concurrent.ConcurrentNavigableMap
 import java.util.concurrent.ConcurrentSkipListMap
 import java.util.stream.Collectors
@@ -19,13 +18,13 @@ class VideoService {
     }
 
     ConcurrentNavigableMap<Long, Video> fetchVideosInTime() {
-        def date = use (TimeCategory) { return new Date() - 60.seconds }
-        return videoMap.tailMap(date.getTime())
+        def date = Instant.now().minusSeconds(60).toEpochMilli()
+        return videoMap.tailMap(date)
     }
 
     ConcurrentNavigableMap<Long, Video> fetchVideosOutDated() {
-        def date = use (TimeCategory) { return new Date() - 60.seconds }
-        return videoMap.headMap(date.getTime())
+        def date = Instant.now().plusSeconds(60).toEpochMilli()
+        return videoMap.headMap(date)
     }
 
     void clearVideos() {
