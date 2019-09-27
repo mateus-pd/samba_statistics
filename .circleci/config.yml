@@ -27,7 +27,7 @@ jobs:
           name: "Install AWS EB CLI"
           command: |
               pip install awsebcli --upgrade --user
-              eb --version
+
       # Checkout Git Repository
       - checkout
 
