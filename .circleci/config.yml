@@ -55,4 +55,4 @@ jobs:
           destination: apps
 
       # Deploy Application
-      - run: eb deploy sambastatistics --verbose
+      - run: eb deploy sambastatistics --verbose -l ROOT
