@@ -44,15 +44,15 @@ jobs:
           key: grailsapp-{{ checksum "build.gradle" }}-{{ checksum "gradle.properties" }}
       # Run Unit Tests
       - run: ./gradlew test
-      - store_artifacts:
-          path: build/test-results/test
-          destination: tests
 
       # Download and cache dependencies
       - run: ./gradlew build --refresh-dependencies
 
       # WAR File
       - run: ./gradlew war
+      - store_artifacts:
+          path: build/libs
+          destination: apps
 
       # Deploy Application
       - run: eb deploy sambastatistics --verbose
